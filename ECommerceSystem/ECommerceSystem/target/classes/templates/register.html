@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Đăng ký tài khoản</h2>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div>
+            <label>Họ tên:</label>
+            <input type="text" th:field="*{name}" required />
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required />
+            <p th:if="${emailError}" th:text="${emailError}"></p>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+        </div>
+        <div>
+            <label>Số điện thoại:</label>
+            <input type="text" th:field="*{phone}" required />
+            <p th:if="${phoneError}" th:text="${phoneError}"></p>
+            <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+        </div>
+        <div>
+            <label>Mật khẩu:</label>
+            <input type="password" th:field="*{password}" required />
+            <p>Yêu cầu: ít nhất 8 ký tự, bao gồm 1 chữ số, 1 chữ hoa và 1 ký tự đặc biệt (@, #, $, &, *)</p>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+        <div>
+            <button type="submit">Đăng ký</button>
+        </div>
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+    </form>
+</div>
+</body>
+</html>
